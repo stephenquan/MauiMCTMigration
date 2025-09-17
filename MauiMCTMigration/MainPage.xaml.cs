@@ -1,4 +1,5 @@
-﻿using CommunityToolkit.Maui.Extensions;
+﻿
+using CommunityToolkit.Maui.Extensions;
 using CommunityToolkit.Maui.Views;
 
 namespace MauiMCTMigration;

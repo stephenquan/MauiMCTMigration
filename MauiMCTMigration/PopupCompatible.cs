@@ -1,4 +1,6 @@
-﻿using SQuan.Helpers.Maui.Mvvm;
+﻿
+using Microsoft.Maui.Controls.Shapes;
+using SQuan.Helpers.Maui.Mvvm;
 
 namespace MauiMCTMigration;
 
@@ -89,10 +91,18 @@ public partial class PopupCompatible : ContentView
 		{
 			HorizontalOptions = LayoutOptions.Center,
 			VerticalOptions = LayoutOptions.Center,
-			BackgroundColor = Color,
-			Padding = 10,
 		};
-		popupContainer.Add(this);
+		popupContainer.Add(new Border()
+		{
+			BackgroundColor = Color,
+			Stroke = Colors.LightGray,
+			StrokeThickness = 1,
+			StrokeShape = new RoundRectangle()
+			{
+				CornerRadius = 10
+			}
+		});
+		popupContainer.Add(new ContentView() { Padding = 20, Content = this });
 		popupContainer.Scale = 0;
 		Task<bool> scaleToTask = popupContainer.ScaleTo(1, 100, Easing.CubicOut);
 		outsideOfPopupContainer.Add(popupContainer);
