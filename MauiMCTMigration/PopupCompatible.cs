@@ -111,12 +111,12 @@ public partial class PopupCompatible : ContentView
 			var anchorPoint = GetAbsolutePosition(anchor);
 			popupContainer.HorizontalOptions = LayoutOptions.Start;
 			popupContainer.VerticalOptions = LayoutOptions.Start;
-			AnchorPopup();
+			ApplyAnchor();
 			anchor.PropertyChanged += (s, e) =>
 			{
 				if (e.PropertyName == nameof(VisualElement.Width))
 				{
-					AnchorPopup();
+					ApplyAnchor();
 				}
 			};
 			popupContainer.PropertyChanged += (s, e) =>
@@ -125,7 +125,7 @@ public partial class PopupCompatible : ContentView
 				{
 					case nameof(PopupCompatible.Width):
 					case nameof(PopupCompatible.Height):
-						AnchorPopup();
+						ApplyAnchor();
 						break;
 				}
 			};
@@ -135,7 +135,7 @@ public partial class PopupCompatible : ContentView
 				{
 					case nameof(ContentPage.Width):
 					case nameof(ContentPage.Height):
-						AnchorPopup();
+						ApplyAnchor();
 						break;
 				}
 			};
@@ -144,7 +144,7 @@ public partial class PopupCompatible : ContentView
 		return await tcs.Task;
 	}
 
-	void AnchorPopup()
+	void ApplyAnchor()
 	{
 		if (Anchor is not null && popupContainer is not null && page is not null)
 		{
