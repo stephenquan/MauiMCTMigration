@@ -37,15 +37,15 @@ public partial class PopupCompatible : ContentView
 	/// </summary>
 	public async Task CloseAsync(object? result = null)
 	{
-		if (page is not null && page.Content is Grid grid && grid is not null && outsideOfPopupContainer is not null)
+		if (page is not null && page.Content is Grid pageGrid && pageGrid is not null && outsideOfPopupContainer is not null)
 		{
-			await grid.Dispatcher.DispatchAsync(async () =>
+			await pageGrid.Dispatcher.DispatchAsync(async () =>
 			{
 				if (popupContainer is not null)
 				{
 					await popupContainer.ScaleTo(0, 100, Easing.CubicIn);
 				}
-				grid.Remove(outsideOfPopupContainer);
+				pageGrid.Remove(outsideOfPopupContainer);
 				outsideOfPopupContainer = null;
 			});
 			tcs.SetResult(result);
