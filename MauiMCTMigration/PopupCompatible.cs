@@ -111,22 +111,12 @@ public partial class PopupCompatible : ContentView
 			var anchorPoint = GetAbsolutePosition(anchor);
 			popupContainer.HorizontalOptions = LayoutOptions.Start;
 			popupContainer.VerticalOptions = LayoutOptions.Start;
-			popupContainer.TranslationX = anchorPoint.X + anchor.Width / 2 - popupContainer.Width / 2;
-			bool anchorAtBottom = anchorPoint.Y + anchor.Height + 10 + popupContainer.Height < page.Height;
-			if (anchorAtBottom)
-			{
-				popupContainer.TranslationY = anchorPoint.Y + anchor.Height + 10;
-			}
-			else
-			{
-				popupContainer.TranslationY = anchorPoint.Y - 10 - popupContainer.Height;
-			}
+			AnchorPopup();
 			anchor.PropertyChanged += (s, e) =>
 			{
 				if (e.PropertyName == nameof(VisualElement.Width))
 				{
-					anchorPoint = GetAbsolutePosition(anchor);
-					popupContainer.TranslationX = anchorPoint.X + anchor.Width / 2 - popupContainer.Width / 2;
+					AnchorPopup();
 				}
 			};
 			popupContainer.PropertyChanged += (s, e) =>
@@ -134,26 +124,42 @@ public partial class PopupCompatible : ContentView
 				switch (e.PropertyName)
 				{
 					case nameof(PopupCompatible.Width):
-						anchorPoint = GetAbsolutePosition(anchor);
-						popupContainer.TranslationX = anchorPoint.X + anchor.Width / 2 - popupContainer.Width / 2;
-						break;
 					case nameof(PopupCompatible.Height):
-						anchorPoint = GetAbsolutePosition(anchor);
-						anchorAtBottom = anchorPoint.Y + anchor.Height + 10 + popupContainer.Height < page.Height;
-						if (anchorAtBottom)
-						{
-							popupContainer.TranslationY = anchorPoint.Y + anchor.Height + 10;
-						}
-						else
-						{
-							popupContainer.TranslationY = anchorPoint.Y - 10 - popupContainer.Height;
-						}
+						AnchorPopup();
+						break;
+				}
+			};
+			page.PropertyChanged += (s, e) =>
+			{
+				switch (e.PropertyName)
+				{
+					case nameof(ContentPage.Width):
+					case nameof(ContentPage.Height):
+						AnchorPopup();
 						break;
 				}
 			};
 		}
 		await scaleToTask;
 		return await tcs.Task;
+	}
+
+	void AnchorPopup()
+	{
+		if (Anchor is not null && popupContainer is not null && page is not null)
+		{
+			var anchorPoint = GetAbsolutePosition(Anchor);
+			popupContainer.TranslationX = anchorPoint.X + Anchor.Width / 2 - popupContainer.Width / 2;
+			bool anchorAtBottom = anchorPoint.Y + Anchor.Height + 10 + popupContainer.Height < page.Height;
+			if (anchorAtBottom)
+			{
+				popupContainer.TranslationY = anchorPoint.Y + Anchor.Height + 10;
+			}
+			else
+			{
+				popupContainer.TranslationY = anchorPoint.Y - 10 - popupContainer.Height;
+			}
+		}
 	}
 
 	/// <summary>
