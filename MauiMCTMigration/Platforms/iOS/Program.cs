@@ -2,6 +2,8 @@
 
 namespace MauiMCTMigration;
 
+#pragma warning disable CS1591 // Suppress missing XML comment warning
+
 public class Program
 {
 	// This is the main entry point of the application.

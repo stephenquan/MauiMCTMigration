@@ -3,6 +3,8 @@
 
 namespace MauiMCTMigration.WinUI;
 
+#pragma warning disable CS1591 // Suppress missing XML comment warning
+
 /// <summary>
 /// Provides application-specific behavior to supplement the default Application class.
 /// </summary>

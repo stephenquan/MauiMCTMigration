@@ -16,7 +16,7 @@
     <NuGetAuditMode>all</NuGetAuditMode>
 
     <!-- MAUI Specific -->
-    <MauiPackageVersion>9.0.110</MauiPackageVersion>
+    <MauiPackageVersion>9.0.100</MauiPackageVersion>
     <NextMauiPackageVersion>10.0.0</NextMauiPackageVersion>
     <MauiStrictXamlCompilation>true</MauiStrictXamlCompilation>
     <SkipValidateMauiImplicitPackageReferences>true</SkipValidateMauiImplicitPackageReferences>
@@ -25,6 +25,7 @@
     <!-- Additional -->
     <MauiVersion>$(MauiPackageVersion)</MauiVersion>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
     
     <!-- WindowsAppSDK
       We should keep this in sync with .NET MAUI https://github.com/dotnet/maui/blob/8ee00e00f603cd8a420a3467daddaf3935c8c587/Directory.Build.props#L142 

@@ -2,6 +2,8 @@
 
 namespace MauiMCTMigration;
 
+#pragma warning disable CS1591 // Suppress missing XML comment warning
+
 [Register("AppDelegate")]
 public class AppDelegate : MauiUIApplicationDelegate
 {
